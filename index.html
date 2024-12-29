@@ -28,6 +28,9 @@
     let lastX = null, lastY = null, lastZ = null;
     let lastUpdate = 0;
 
+   //現在の透明度
+    let alpha = 0;
+   
     const image = document.getElementById('targetImage');
 
     // 加速度センサーのデータを取得
@@ -42,7 +45,7 @@
           const speed = Math.abs(deltaX + deltaY + deltaZ);
 
           if (speed > SHAKE_THRESHOLD) {
-            changeImageColor();
+            increaseOpcity();
           }
         }
         lastX = x;
@@ -53,9 +56,14 @@
     });
 
     // 画像の色をランダムに変更する関数
-    function changeImageColor() {
-      const hue = Math.floor(Math.random() * 360);
-      image.style.filter = `hue-rotate(${hue}deg)`;
+    function increaseOpcity() {
+      if(alpha < 1){
+       alpha += 0.1;
+       if(alpha > 1){
+        alpha = 1;
+       }
+       image.style.opacity = alpha;
+      }
     }
   </script> 
  
