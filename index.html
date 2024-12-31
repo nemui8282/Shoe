@@ -86,7 +86,45 @@
       window.addEventListener('devicemotion', (event) => {
         // 加速度データを取得
 
-       const currentTime = Date.now();
+      //  const currentTime = Date.now();
+      // if ((currentTime - lastUpdate) > 100) { // データ取得間隔を100msに制限
+      //   const { x, y, z } = event.acceleration;
+      //   if (lastX !== null && lastY !== null && lastZ !== null) {
+      //     const deltaX = x - lastX;
+      //     const deltaY = y - lastY;
+      //     const deltaZ = z - lastZ;
+      //     const speed = Math.abs(deltaX + deltaY + deltaZ);
+
+      //     if (speed > SHAKE_THRESHOLD) {
+      //       increaseOpcity();
+      //     }
+      //   }
+      //   lastX = x;
+      //   lastY = y;
+      //   lastZ = z;
+      //   lastUpdate = currentTime;
+      // }
+       
+        const { x, y, z } = event.acceleration; // X, Y, Z 軸の加速度
+        if (x !== null && y !== null && z !== null) {
+          // XYZの加速度値をそれぞれ取得して合計値を計算
+          const sum = Math.abs(x) + Math.abs(y) + Math.abs(z); // 絶対値の合計
+          
+          // 加速度データをリアルタイムで表示
+          statusDiv.textContent = `加速度センサーのデータ - X: ${x.toFixed(2)}, Y: ${y.toFixed(2)}, Z: ${z.toFixed(2)}`;
+          // XYZの合計値を表示
+          sumDiv.textContent = `XYZの合計値: ${sum.toFixed(2)}`;
+        } else {
+          // データが取得できない場合
+          statusDiv.textContent = 'センサーからデータが取得できません。';
+          sumDiv.textContent = 'XYZの合計値: 取得できません';
+        }
+      });
+    }
+   
+    加速度センサーのデータを取得
+    window.addEventListener('devicemotion', (event) => {
+      const currentTime = Date.now();
       if ((currentTime - lastUpdate) > 100) { // データ取得間隔を100msに制限
         const { x, y, z } = event.acceleration;
         if (lastX !== null && lastY !== null && lastZ !== null) {
@@ -104,45 +142,7 @@
         lastZ = z;
         lastUpdate = currentTime;
       }
-       
-        // const { x, y, z } = event.acceleration; // X, Y, Z 軸の加速度
-        // if (x !== null && y !== null && z !== null) {
-        //   // XYZの加速度値をそれぞれ取得して合計値を計算
-        //   const sum = Math.abs(x) + Math.abs(y) + Math.abs(z); // 絶対値の合計
-          
-        //   // 加速度データをリアルタイムで表示
-        //   statusDiv.textContent = `加速度センサーのデータ - X: ${x.toFixed(2)}, Y: ${y.toFixed(2)}, Z: ${z.toFixed(2)}`;
-        //   // XYZの合計値を表示
-        //   sumDiv.textContent = `XYZの合計値: ${sum.toFixed(2)}`;
-        // } else {
-        //   // データが取得できない場合
-        //   statusDiv.textContent = 'センサーからデータが取得できません。';
-        //   sumDiv.textContent = 'XYZの合計値: 取得できません';
-        // }
-      });
-    }
-   
-    // 加速度センサーのデータを取得
-    // window.addEventListener('devicemotion', (event) => {
-    //   const currentTime = Date.now();
-    //   if ((currentTime - lastUpdate) > 100) { // データ取得間隔を100msに制限
-    //     const { x, y, z } = event.acceleration;
-    //     if (lastX !== null && lastY !== null && lastZ !== null) {
-    //       const deltaX = x - lastX;
-    //       const deltaY = y - lastY;
-    //       const deltaZ = z - lastZ;
-    //       const speed = Math.abs(deltaX + deltaY + deltaZ);
-
-    //       if (speed > SHAKE_THRESHOLD) {
-    //         increaseOpcity();
-    //       }
-    //     }
-    //     lastX = x;
-    //     lastY = y;
-    //     lastZ = z;
-    //     lastUpdate = currentTime;
-    //   }
-    // });
+    });
 
     // 画像の色をランダムに変更する関数
     function increaseOpcity() {
