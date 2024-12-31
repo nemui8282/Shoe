@@ -25,13 +25,12 @@
  <body> 
   <img id="targetImage" src="ringo.jpg" style="opacity:0;"> 
 
-<!--   <h1>加速度センサーのテスト</h1> -->
   <!-- センサーの許可を求めるボタン -->
   <button id="permissionButton">加速度センサーを許可</button>
   <!-- センサーの状態やエラー、データを表示するためのエリア -->
-<!--   <div id="status">センサーの状態を表示します...</div> -->
+  <div id="status">センサーの状態を表示します...</div>
   <!-- XYZの合計値を表示するエリア -->
-<!--   <div id="sum">XYZの合計値: 計算中...</div> -->
+  <div id="sum">XYZの合計値: 計算中...</div>
   
   <script>
 
@@ -85,25 +84,6 @@
       // デバイスの動き（加速度）を取得
       window.addEventListener('devicemotion', (event) => {
         // 加速度データを取得
-
-      //  const currentTime = Date.now();
-      // if ((currentTime - lastUpdate) > 100) { // データ取得間隔を100msに制限
-      //   const { x, y, z } = event.acceleration;
-      //   if (lastX !== null && lastY !== null && lastZ !== null) {
-      //     const deltaX = x - lastX;
-      //     const deltaY = y - lastY;
-      //     const deltaZ = z - lastZ;
-      //     const speed = Math.abs(deltaX + deltaY + deltaZ);
-
-      //     if (speed > SHAKE_THRESHOLD) {
-      //       increaseOpcity();
-      //     }
-      //   }
-      //   lastX = x;
-      //   lastY = y;
-      //   lastZ = z;
-      //   lastUpdate = currentTime;
-      // }
        
         const { x, y, z } = event.acceleration; // X, Y, Z 軸の加速度
         if (x !== null && y !== null && z !== null) {
